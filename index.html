@@ -53,6 +53,10 @@
       min-height: 20px;
     }
 
+    .success {
+      color: #45a049;
+    }
+
     .hint {
       color: #ffd700;
     }
@@ -67,7 +71,7 @@
 <div class="container">
   <h2>🔐 Notfall-Zugang</h2>
 
-  <p>
+  <p id="headertext">
     Internes System – Nur für autorisiertes Barpersonal.<br><br>
     Zugriff ausschließlich im medizinischen Notfall erlaubt.<br>
     Unautorisierte Nutzung führt zu... unangenehmen Gesprächen.
@@ -83,14 +87,17 @@
 <script>
   let stage = 0; // 0 = erstes Rätsel, 1 = zweites Passwort
 
-const hint = "<span class='hint'>Hinweis: N2 A7 E4 U2 T1 U3 N4 Z1</span>"
+  const stageTwo = "<span class='success'>✔ Stufe 1 autorisiert<br>Zum vollständigen login, Zutaten extrahieren</span>"
+  const hint = "<span class='hint'>Hinweis: N2 A7 E4 U2 T1 U3 N4 Z1</span>"
 
   function check() {
     const input = document.getElementById("input").value.toLowerCase().trim();
+    const header = document.getElementById("headertext");
     const message = document.getElementById("message");
 
     if (stage === 0) {
       if (input === "zutaten") {
+        header.innerHTML = stageTwo
         message.innerHTML = hint;
         stage = 1;
       } else {
@@ -99,7 +106,7 @@ const hint = "<span class='hint'>Hinweis: N2 A7 E4 U2 T1 U3 N4 Z1</span>"
     } else {
       if (input === "eiertanz") {
         window.location.href = "geheim.html";
-      } else {
+    } else {
         message.innerHTML = "<span class='error'>❌ Code inkorrekt</span><br>" + hint;
       }
     }
