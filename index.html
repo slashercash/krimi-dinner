@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Notfall-Zugangssystem</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background: #1c1c1c;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      width: 300px;
+    }
+
+    input {
+      padding: 10px;
+      width: 80%;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+    .message {
+      margin-top: 15px;
+      min-height: 20px;
+    }
+
+    .hint {
+      color: #ffd700;
+    }
+
+    .error {
+      color: #ff4d4d;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>🔐 Notfall-Zugang</h2>
+
+  <p>
+    Internes System – Nur für autorisiertes Barpersonal.<br><br>
+    Zugriff ausschließlich im medizinischen Notfall erlaubt.<br>
+    Unautorisierte Nutzung führt zu... unangenehmen Gesprächen.
+  </p>
+
+  <input type="text" id="input" placeholder="Zugangscode eingeben">
+  <br>
+  <button onclick="check()">Weiter</button>
+
+  <div class="message" id="message"></div>
+</div>
+
+<script>
+  let stage = 0; // 0 = erstes Rätsel, 1 = zweites Passwort
+
+const hint = "<span class='hint'>Hinweis: N2 A7 E4 U2 T1 U3 N4 Z1</span>"
+
+  function check() {
+    const input = document.getElementById("input").value.toLowerCase().trim();
+    const message = document.getElementById("message");
+
+    if (stage === 0) {
+      if (input === "zutaten") {
+        message.innerHTML = hint;
+        stage = 1;
+      } else {
+        message.innerHTML = "<span class='error'>❌ Zugriff verweigert</span>";
+      }
+    } else {
+      if (input === "eiertanz") {
+        window.location.href = "geheim.html";
+      } else {
+        message.innerHTML = "<span class='error'>❌ Code inkorrekt</span><br>" + hint;
+      }
+    }
+
+    document.getElementById("input").value = "";
+  }
+</script>
+
+</body>
+</html>
